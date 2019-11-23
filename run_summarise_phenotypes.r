@@ -1,5 +1,6 @@
 source("summarise_phenotypes.r")
 
+print("I am here")
 ## VERNERI'S APPLICATION.
 
 # Running Verneri's application through.

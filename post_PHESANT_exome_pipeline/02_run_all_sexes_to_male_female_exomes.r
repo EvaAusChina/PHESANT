@@ -13,13 +13,12 @@ n_chunks <- 10
 
 # used for 100k:
 # variable_info <- "../variable-info/outcome_info_final_round3.tsv"
+# coding_info_file <- "../variable-info/data-coding-ordinal-info.txt"
+# QCed_io_name <- '../../pharma_parsed_and_restricted_to_100K_sample_subset'
+
 variable_info <- "../variable-info/outcome_info_final_pharma_nov2019.tsv"
 filename_root <- paste0("../../pharma_exomes_parsed_output_", n_exomes, "_chunk.")
-# used for 100k:
-# coding_info_file <- "../variable-info/data-coding-ordinal-info.txt"
 coding_info_file <- "../variable-info/data-coding-ordinal-info-nov2019-update.txt"
-# used for 100k:
-# QCed_io_name <- '../../pharma_parsed_and_restricted_to_100K_sample_subset'
 QCed_io_name <- '../../pharma_parsed_and_restricted_to_200K_sample_subset'
 
 # Pull out the make and female userIds for our application. Do this using the initially create file (paste0(QCed_io_name, "tsv")).
