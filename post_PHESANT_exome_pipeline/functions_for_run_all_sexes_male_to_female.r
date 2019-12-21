@@ -33,7 +33,10 @@ keep_cat_ordered <- function(df_column, minimum=5000) {
 		return(FALSE)
 	}
 }
+get_raw_cts(trybd$f.eid, trybd)
+trybd[1:5,1:5]
 
+load("G:/phenotype estimation/F__phenotype estimation_trybd.Rdata")
 get_raw_cts <- function(cts_variable, file_header, file=paste0(QCed_input_file_and_output_name , ".tsv"), single=TRUE)
 {	
 	# Get matches in the header file.
@@ -53,7 +56,10 @@ get_raw_cts <- function(cts_variable, file_header, file=paste0(QCed_input_file_a
 		}
 	}
 }
-
+library(stringr)
+colnames(trybd) <- str_extract(colnames(trybd),"[0-9]+")
+head(colnames(trybd))
+coding_info <- reassign_all_values(colnames(trybd)[-1], variable_info)
 reassign_all_values <- function(cts_variables, phenofile) {
 	where <- phenofile$FieldID %in% cts_variables
 	changes <- cbind(phenofile$FieldID[where], phenofile$DATA_CODING[where])
@@ -96,6 +102,8 @@ change_values <- function(codings, data_frame, coding_info_file) {
 	return(data_frame)
 }
 
+
+### take average for each variables and integrate them together
 average_over_cts_multi <- function(cts_variable, data_frame)
 {
 	where <- grep(cts_variable, names(data_frame))
