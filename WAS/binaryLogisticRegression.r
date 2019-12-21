@@ -1,5 +1,17 @@
 # Performs binary logistic regression on the phenotype stored in this data 
 # and stores result in 'results-logistic-binary' results file.
+varlogfile <- read.table("variable-info/data-coding-ordinal-info-nov2019-update.txt",header = TRUE)
+head(varlogfile)
+manual_df <- fread("variable-info/new_phenotypes_march_2019_excluded.tsv", sep='\t', header=TRUE, data.table=FALSE)
+fwrite(df, sep='\t', file = "variable-info/outcome_info_final_round3.tsv")
+# NOTE: Have to read in with Excel and write to .tsv to get the correct behavious with PHESANT...
+
+
+require(data.table)      
+thisdata <-  as.data.frame(fread('variable-info/outcome_info_final_pharma_nov2019.tsv'))
+binaryLogisticRegression(thisdata$FieldID, thisdata$ValueType, thisdata,varlogfile)  
+phenoStartIdx <-1
+
 binaryLogisticRegression <- function(varName, varType, thisdata, varlogfile)
 {   
     to_save <- thisdata[, phenoStartIdx]
