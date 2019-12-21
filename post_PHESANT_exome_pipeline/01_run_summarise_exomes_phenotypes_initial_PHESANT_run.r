@@ -13,7 +13,9 @@ source("../summarise_phenotypes.r")
 n_exomes <- '200k'
 n_chunks <- 10
 
-variable_info <- "../variable-info/outcome_info_final_pharma_nov2019.tsv"
+outcome_info_final <- fread("G:/COURSERA/GITHUB/PHESANT/variable-info/outcome_info_final_pharma_nov2019.tsv")
+variable_info <- outcome_info_final
+# variable_info <- "variable-info/outcome_info_final_pharma_nov2019.tsv"
 filename_root <- paste0("../../pharma_exomes_parsed_output_", n_exomes, "_chunk.")
 coding_info_file <- "../variable-info/data-coding-ordinal-info-nov2019-update.txt"
 
