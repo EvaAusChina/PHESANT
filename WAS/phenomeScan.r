@@ -18,6 +18,11 @@
 
 library("optparse")
 library("data.table")
+load("G:/phenotype estimation/F__phenotype estimation_trybd.Rdata")
+phenofile <- trybd
+
+variablelistfile <- fread("G:/COURSERA/GITHUB/PHESANT/variable-info/outcome_info_final_pharma_nov2019.tsv")
+datacodingfile <- read.table("G:/COURSERA/GITHUB/PHESANT/variable-info/data-coding-ordinal-info-nov2019-update.txt")
 
 option_list <- list(
   make_option(c("-f", "--phenofile"), type="character", default=NULL,
@@ -63,18 +68,29 @@ option_list <- list(
     help="The cutoff for the number of distinct integer values to send an integer variable to a continuous variable.")
 )
 
+testDir = "../testWAS/"
+phenofile="${testDir}data/phenotypes.csv"
+
+
+opt$phenofile <<-  paste(datadir,'phenotypes.csv', sep="")
+opt$variablelistfile <<- '../testWAS/variable-lists/outcome-info.tsv'
+opt$datacodingfile <<- '../testWAS/variable-lists/data-coding-ordinal-info.txt'
+opt$traitofinterest <<- 'exposure'
+opt$resDir <<- '../testWAS/results/'
+opt$userId <<- 'userId'
+
 opt_parser <- OptionParser(option_list = option_list)
 opt <- parse_args(opt_parser)
 
 varlogfile <- paste(opt$resDir, '/', opt$out, '.', opt$partIdx, '.log', sep='')
 outputfile <- paste(opt$resDir, '/', opt$out, '.', opt$partIdx, '.tsv', sep='')
 
-source("processArgs.r")
+source("G:/COURSERA/GITHUB/PHESANT/WAS/processArgs.r")
 opt <<- opt
 print(opt)
-processArgs()
+processArgs(phenofile)
 
-source("initFunctions.r")
+source("G:/COURSERA/GITHUB/PHESANT/WAS/initFunctions.r")
 loadSource()
 
 # Load the files we write to and use
