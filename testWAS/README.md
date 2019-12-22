@@ -28,6 +28,7 @@ Or to run part 1 of 3 parts use:
 ```bash
 cd ../WAS/
 
+
 testDir="../testWAS/"
 
 Rscript phenomeScan.r \
