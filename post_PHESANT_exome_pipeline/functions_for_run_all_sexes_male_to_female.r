@@ -112,6 +112,8 @@ average_over_cts_multi <- function(cts_variable, data_frame)
 	return(column)
 }
 
+x1807 <- irnt(trybd[,"f.1807.0.0"])
+head(x1807)
 irnt <- function(cts_variable) {
     set.seed(1234) # This is the same as was used by PHESANT - for checking.
     n_cts <- length(which(!is.na(cts_variable)))
