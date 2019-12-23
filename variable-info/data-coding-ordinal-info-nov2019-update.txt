@@ -433,3 +433,4 @@ dataCode,ordinal,ordering,reassignments,default_value,default_related_field
 100699,-1,,,,
 100700,1,,,,
 CC_MAX_DIGITS,,,-1=NA,,
+CAT-MULTIPLE || CAT-MULTIPLE || reassignments: 7=6 || CAT-MULTIPLE || CAT-MULTIPLE || CAT-MULTIPLE || 

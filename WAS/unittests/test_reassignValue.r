@@ -4,7 +4,14 @@ library(readr)
 phenotypes <- read_csv("testWAS/data/phenotypes.csv")
 
 source("WAS/reassignValue.r");
-varlogfile <- "testing.log"
+
+datacodingfile$V1
+
+varlogfile <- read_tsv("variable-info/outcome_info_final_pharma_nov2019.tsv")
+datacodingfile <- "variable-info/data-coding-ordinal-info-nov2019-update.txt"
+
+x_try <- reassignValue2(trybd, datacodingfile$V1, varlogfile)
+
 # Reassigning a value in a categorical variable
 x1 = reassignValue2(c(1,1,6,6,7,3,5,7,3), "7=6", varlogfile);
 
