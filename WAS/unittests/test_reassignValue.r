@@ -1,9 +1,13 @@
 library("testthat");
+library(dplyr)
+library(readr)
+phenotypes <- read_csv("testWAS/data/phenotypes.csv")
 
-source("../reassignValue.r");
+source("WAS/reassignValue.r");
 varlogfile <- "testing.log"
 # Reassigning a value in a categorical variable
 x1 = reassignValue2(c(1,1,6,6,7,3,5,7,3), "7=6", varlogfile);
+
 expect_equal(x1, c(1,1,6,6,6,3,5,6,3));
 
 # Reassign a value in a categorical multiple value, with several columns (arrays)

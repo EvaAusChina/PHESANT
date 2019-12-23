@@ -1,5 +1,13 @@
 # Parse the arguments input by the user
 # if argument 'test' is used then run test phenome scan
+processArgs()
+
+opt$phenofile <<-  paste(datadir,'phenotypes.csv', sep="")
+opt$variablelistfile <- './testWAS/variable-lists/outcome-info.tsv'
+opt$datacodingfile <<- '../testWAS/variable-lists/data-coding-ordinal-info.txt'
+opt$traitofinterest <<- 'exposure'
+opt$resDir <<- '../testWAS/results/'
+opt$userId <<- 'userId'
 processArgs <- function()
 {
     if (opt$test==TRUE) {
@@ -52,6 +60,7 @@ processArgs <- function()
     # Just some information to the user
     print("Adjusting for age and sex")
 }
+
 
 # Parse the 'part' arguments and check they are valid
 processParts <- function(pIdx, nParts)
