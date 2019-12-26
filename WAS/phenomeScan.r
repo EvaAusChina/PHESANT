@@ -69,12 +69,20 @@ opt <- parse_args(opt_parser)
 varlogfile <- paste(opt$resDir, '/', opt$out, '.', opt$partIdx, '.log', sep='')
 outputfile <- paste(opt$resDir, '/', opt$out, '.', opt$partIdx, '.tsv', sep='')
 
-source("../WAS/processArgs.r")
-opt <<- opt
+source("WAS/processArgs.r")
+datadir <- 'WAS/'
+opt$phenofile <-  paste(datadir,'phenotypes.csv', sep="")
+opt$variablelistfile <- "variable-info/outcome_info_final_pharma_nov2019.tsv"
+opt$datacodingfile <- "variable-info/data-coding-ordinal-info-nov2019-update.txt"
+# opt$traitofinterest <<- 'exposure'
+opt$resDir <- 'WAS/results'
+opt$userId <- 'userId'
+
+opt <- opt
 print(opt)
 processArgs()
 
-source("initFunctions.r")
+source("WAS/initFunctions.r")
 loadSource()
 
 # Load the files we write to and use
@@ -95,8 +103,8 @@ phenoVars <- colnames(data)
 
 # First and second columns are the id and snpScore, respectively, 
 # as determined in loadData.r
-phenoVars <- phenoVars[-c(1,2)] 
-
+# phenoVars <- phenoVars[-c(1,2)]
+phenoVars <- phenoVars[-1]
 # This decides on the start and end idxs of phenotypes that we test,
 # so that we can parallelise into multiple jobs
 if (opt$varTypeArg != "all") {
