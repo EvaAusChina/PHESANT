@@ -17,7 +17,6 @@
 # DEALINGS IN THE SOFTWARE.
 
 library("optparse")
-library(readr)
 library("data.table")
 
 option_list <- list(
@@ -64,42 +63,18 @@ option_list <- list(
     help="The cutoff for the number of distinct integer values to send an integer variable to a continuous variable.")
 )
 
-
-load("G:/phenotype estimation/F__phenotype estimation_trybd.Rdata")
-write.csv(trybd, file = "WAS/phenotypes.csv")
-
-variablelistfile <- fread("variable-info/outcome_info_final_pharma_nov2019.tsv")
-datacodingfile <- read.table("variable-info/data-coding-ordinal-info-nov2019-update.txt")
-testDir = "../testWAS/"
-phenofile="${testDir}data/phenotypes.csv"
-
-
-datadir <- '../WAS/'
-opt$phenofile <<-  paste(datadir,'phenotypes.csv', sep="")
-opt$variablelistfile <- './testWAS/variable-lists/outcome-info.tsv'
-opt$datacodingfile <<- '../testWAS/variable-lists/data-coding-ordinal-info.txt'
-opt$traitofinterest <<- 'exposure'
-opt$resDir <<- '../testWAS/results/'
-opt$userId <<- 'userId'
-
-opt$variablelistfile <- variablelistfile
-opt$phenofile <- phenofile
-opt$userId <- "userId"
-opt$datacodingfile <- datacodingfile
-opt$resDir =  'testWAS/results'
-
 opt_parser <- OptionParser(option_list = option_list)
 opt <- parse_args(opt_parser)
 
 varlogfile <- paste(opt$resDir, '/', opt$out, '.', opt$partIdx, '.log', sep='')
 outputfile <- paste(opt$resDir, '/', opt$out, '.', opt$partIdx, '.tsv', sep='')
 
-source("WAS/processArgs.r")
+source("../WAS/processArgs.r")
 opt <<- opt
 print(opt)
-processArgs(phenofile)
+processArgs()
 
-source("WAS/initFunctions.r")
+source("initFunctions.r")
 loadSource()
 
 # Load the files we write to and use
