@@ -53,6 +53,9 @@ loadData <- function()
     print("checking size of datax:")
     print(dim(datax))
 
+    # datax <- phenotype[,-1]
+    # 
+    
     if (nrow(datax)==0)
     	stop("No examples with row in both trait of interest and phenotype files", call.=FALSE)
 
