@@ -5,20 +5,6 @@
 # 3) Checking derived variable has at least catmultcutoff cases in each group
 # 4) Calling binaryLogisticRegression function for this derived binary variable
 
-load("G:/phenotype estimation/F__phenotype estimation_trybd.Rdata")
-colnames(trybd) <- gsub("[.]", "_", colnames(trybd))
-colnames(trybd) <- gsub("^f_", "x", colnames(trybd))
-colnames(trybd)[1] <- "userId"
-write_tsv(trybd, path = "WAS/phenotypes.tsv")
-
-phenofile = trybd
-varlogfile = "../variable-info/data-coding-ordinal-info-nov2019-update.txt"
-varlogfile <- read_tsv("variable-info/outcome_info_final_pharma_nov2019.tsv")
-datacodingfile <- read.table("variable-info/data-coding-ordinal-info-nov2019-update.txt")
-
-head(datacodingfile)
-testCategoricalMultiple(colnames(trybd)[-1], datacodingfile ,trybd , variablelistfile)
-
 
 testCategoricalMultiple <- function(varName, varType, thisdata, varlogfile)
 {
