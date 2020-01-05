@@ -99,12 +99,17 @@ phenoStartIdx <- numPreceedingCols+1
 print(paste0('pheno start Idx: ', phenoStartIdx))
 cat("LOADING DONE.\n")
 
-phenoVars <- colnames(data)
+
+### 22010_0 was deleted because of bug
+### data2 <- data[,-which(colnames(data) ==  "x22010_0_0")]
+
+
+phenoVars <- colnames(data2)
 
 # First and second columns are the id and snpScore, respectively, 
 # as determined in loadData.r
-# phenoVars <- phenoVars[-c(1,2)]
-phenoVars <- phenoVars[-1]
+phenoVars <- phenoVars[-c(1,2)]
+# phenoVars <- phenoVars[-1]
 # This decides on the start and end idxs of phenotypes that we test,
 # so that we can parallelise into multiple jobs
 if (opt$varTypeArg != "all") {
@@ -123,7 +128,7 @@ if (opt$varTypeArg != "all") {
     partEnd <- length(phenoVars)
 }
 
-cat(partStart, '-', partEnd, '\n')
+# cat(partStart, '-', partEnd, '\n')
 
 currentVar <- ""
 currentVarShort <- ""
@@ -133,7 +138,7 @@ first <- TRUE
 phenoIdx <- 0 
 i <- 1
 
-data_to_store <- matrix(nrow = nrow(data), ncol = 0)
+data_to_store <- matrix(nrow = nrow(data2), ncol = 0)
 data_to_store <- as.data.frame(data_to_store)
 data_to_store_var <- c()
 
@@ -145,11 +150,11 @@ for (var in phenoVars) {
     varxShort <- gsub("_[0-9]+_[0-9]+$", "", varxShort)
 
     # Test this variable
-    cat("The current variable is", currentVar, '\n')
-    cat(var, '\n')
+    # cat("The current variable is", currentVar, '\n')
+    # cat(var, '\n')
 
     if (currentVar == varx) {
-        thisCol <- data[,eval(var)]
+        thisCol <- data2[,eval(var)]
         thisCol <- replaceNaN(thisCol)
         currentVarValues <- cbind.data.frame(currentVarValues, thisCol)
     } else if (currentVarShort == varxShort) {
@@ -157,7 +162,7 @@ for (var in phenoVars) {
     } else {
         # New variable so run test for previous (we have collected all the columns now)
         if (first == FALSE) {
-            thisdata <- cbind.data.frame(data$geno, confounders, currentVarValues)
+            thisdata <- cbind.data.frame(data2$geno, confounders, currentVarValues)
             colnames(thisdata)[1] <- "geno"
             # Only start new variable processing if last column of it is within 
             # the idx range for this part
